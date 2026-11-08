@@ -296,6 +296,11 @@ manifest:
     - name: hostap
       path: modules/lib/hostap
       revision: 1ce844ea5a9d8860d8690a125925fcc7274461df
+    - name: leancrypto
+      url: https://github.com/smuellerDD/leancrypto
+      revision: 65eb4e7e84e3a5499460a66b1623ccf6c59628b1
+      path: modules/crypto/leancrypto
+      submodules: true
     - name: liblc3
       revision: 48bbd3eacd36e99a57317a0a4867002e0b09e183
       path: modules/lib/liblc3

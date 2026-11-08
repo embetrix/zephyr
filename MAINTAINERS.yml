@@ -7568,6 +7568,15 @@ West:
   tests:
     - net.wifi
 
+"West project: leancrypto":
+  status: maintained
+  maintainers:
+    - embetrix
+  files:
+    - modules/leancrypto/
+  labels:
+    - "area: Crypto / RNG"
+
 "West project: liblc3":
   status: maintained
   maintainers:

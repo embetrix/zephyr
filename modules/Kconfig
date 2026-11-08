@@ -82,6 +82,9 @@ comment "libsbc module not available."
 comment "LittleFS module not available."
 	depends on !ZEPHYR_LITTLEFS_MODULE
 
+comment "LeanCrypto module not available."
+	depends on !ZEPHYR_LEANCRYPTO_MODULE
+
 comment "mbedtls module not available."
 	depends on !ZEPHYR_MBEDTLS_MODULE
 

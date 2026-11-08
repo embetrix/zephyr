@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2026 Embetrix Embedded Systems Solutions <ayoub.zaki@embetrix.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config ZEPHYR_LEANCRYPTO_MODULE
+	bool
+
+menuconfig LEANCRYPTO
+	bool "LeanCrypto"
+	depends on CSPRNG_ENABLED || (ZTEST && TEST_CSPRNG_GENERATOR)
+	help
+	  Enable the portable LeanCrypto API. Enable CSPRNG_NEEDED and a
+	  cryptographically secure entropy source on the target platform.
+	  No PSA, TLS, or bootloader integration is provided.
+
+if LEANCRYPTO
+
+config LEANCRYPTO_ML_KEM_512
+	bool "ML-KEM-512"
+	help
+	  Build the portable C implementation of FIPS 203 ML-KEM-512 and its
+	  SHA-3/SHAKE dependencies. Operations use caller-owned key and
+	  ciphertext buffers and stack scratch space. Size the calling
+	  thread's stack using measurements on the target platform.
+
+config LEANCRYPTO_ML_KEM_768
+	bool "ML-KEM-768"
+	default y
+	help
+	  Build the portable C implementation of FIPS 203 ML-KEM-768 and its
+	  SHA-3/SHAKE dependencies. Operations use caller-owned key and
+	  ciphertext buffers and stack scratch space. Size the calling
+	  thread's stack using measurements on the target platform.
+
+config LEANCRYPTO_ML_KEM_1024
+	bool "ML-KEM-1024"
+	help
+	  Build the portable C implementation of FIPS 203 ML-KEM-1024 and its
+	  SHA-3/SHAKE dependencies. Operations use caller-owned key and
+	  ciphertext buffers and stack scratch space. Size the calling
+	  thread's stack using measurements on the target platform.
+
+config LEANCRYPTO_ML_DSA_44
+	bool "ML-DSA-44"
+	help
+	  Build portable FIPS 204 ML-DSA-44 key generation, signing and
+	  verification. Use lc_seeded_rng for randomized signing backed by
+	  Zephyr's CSPRNG. Caller-owned key and signature buffers and large
+	  stack scratch areas must fit in the target's RAM. Measure the
+	  calling thread's stack usage on the target platform.
+
+config LEANCRYPTO_ML_DSA_65
+	bool "ML-DSA-65"
+	help
+	  Build portable FIPS 204 ML-DSA-65 key generation, signing and
+	  verification. Use lc_seeded_rng for randomized signing backed by
+	  Zephyr's CSPRNG. Caller-owned key and signature buffers and large
+	  stack scratch areas must fit in the target's RAM. Measure the
+	  calling thread's stack usage on the target platform.
+
+config LEANCRYPTO_ML_DSA_87
+	bool "ML-DSA-87"
+	help
+	  Build portable FIPS 204 ML-DSA-87 key generation, signing and
+	  verification. Use lc_seeded_rng for randomized signing backed by
+	  Zephyr's CSPRNG. Caller-owned key and signature buffers and large
+	  stack scratch areas must fit in the target's RAM. Measure the
+	  calling thread's stack usage on the target platform.
+
+endif # LEANCRYPTO
