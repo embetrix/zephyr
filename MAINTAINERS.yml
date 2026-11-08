@@ -7575,6 +7575,7 @@ West:
   files:
     - modules/leancrypto/
     - tests/crypto/leancrypto/
+    - doc/services/crypto/leancrypto.rst
   labels:
     - "area: Crypto / RNG"
   tests:

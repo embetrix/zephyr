@@ -14,5 +14,6 @@ The following crypto libraries have been included:
    :maxdepth: 1
 
    psa_crypto.rst
+   leancrypto.rst
    random/index.rst
    api/index.rst
