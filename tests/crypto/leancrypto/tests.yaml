@@ -1,0 +1,262 @@
+# SPDX-FileCopyrightText: 2026 Embetrix Embedded Systems Solutions <ayoub.zaki@embetrix.com>
+# SPDX-License-Identifier: Apache-2.0
+
+common:
+  tags:
+    - crypto
+    - leancrypto
+  platform_allow:
+    - mps2/an385
+    - qemu_cortex_m3
+    - nucleo_f429zi
+    - stm32f769i_disco
+  integration_platforms:
+    - mps2/an385
+    - qemu_cortex_m3
+    - nucleo_f429zi
+    - stm32f769i_disco
+  harness: ztest
+  timeout: 120
+  min_ram: 64
+
+tests:
+  crypto.leancrypto.ml_kem_768:
+    testcases:
+      - leancrypto.known_answer
+      - leancrypto.random_round_trip
+      - leancrypto.random_failure
+  crypto.leancrypto.baseline:
+    testcases:
+      - leancrypto.known_answer
+      - leancrypto.random_round_trip
+      - leancrypto.random_failure
+    extra_configs:
+      - CONFIG_LEANCRYPTO=n
+      - CONFIG_TEST_LEANCRYPTO_BASELINE=y
+  crypto.leancrypto.ml_kem_512:
+    testcases:
+      - leancrypto.known_answer
+      - leancrypto.random_round_trip
+      - leancrypto.random_failure
+    extra_configs:
+      - CONFIG_LEANCRYPTO_ML_KEM_768=n
+      - CONFIG_LEANCRYPTO_ML_KEM_512=y
+      - CONFIG_TEST_LEANCRYPTO_ML_KEM_512=y
+  crypto.leancrypto.ml_kem_1024:
+    testcases:
+      - leancrypto.known_answer
+      - leancrypto.random_round_trip
+      - leancrypto.random_failure
+    extra_configs:
+      - CONFIG_LEANCRYPTO_ML_KEM_768=n
+      - CONFIG_LEANCRYPTO_ML_KEM_1024=y
+      - CONFIG_TEST_LEANCRYPTO_ML_KEM_1024=y
+  crypto.leancrypto.baseline_512:
+    testcases:
+      - leancrypto.known_answer
+      - leancrypto.random_round_trip
+      - leancrypto.random_failure
+    extra_configs:
+      - CONFIG_LEANCRYPTO=n
+      - CONFIG_TEST_LEANCRYPTO_BASELINE=y
+      - CONFIG_TEST_LEANCRYPTO_ML_KEM_512=y
+  crypto.leancrypto.baseline_1024:
+    testcases:
+      - leancrypto.known_answer
+      - leancrypto.random_round_trip
+      - leancrypto.random_failure
+    extra_configs:
+      - CONFIG_LEANCRYPTO=n
+      - CONFIG_TEST_LEANCRYPTO_BASELINE=y
+      - CONFIG_TEST_LEANCRYPTO_ML_KEM_1024=y
+  crypto.leancrypto.all_enabled:
+    testcases:
+      - leancrypto.known_answer
+      - leancrypto.random_round_trip
+      - leancrypto.random_failure
+    extra_configs:
+      - CONFIG_LEANCRYPTO_ML_KEM_512=y
+      - CONFIG_LEANCRYPTO_ML_KEM_1024=y
+  crypto.leancrypto.ml_dsa_44:
+    testcases:
+      - leancrypto_mldsa.known_answer
+      - leancrypto_mldsa.random_sign_verify
+      - leancrypto_mldsa.random_failure
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    min_ram: 256
+    timeout: 180
+    extra_configs:
+      - CONFIG_LEANCRYPTO_ML_KEM_768=n
+      - CONFIG_LEANCRYPTO_ML_DSA_44=y
+      - CONFIG_TEST_LEANCRYPTO_ML_DSA_44=y
+  crypto.leancrypto.baseline_ml_dsa_44:
+    testcases:
+      - leancrypto_mldsa.known_answer
+      - leancrypto_mldsa.random_sign_verify
+      - leancrypto_mldsa.random_failure
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    min_ram: 256
+    timeout: 180
+    extra_configs:
+      - CONFIG_LEANCRYPTO=n
+      - CONFIG_TEST_LEANCRYPTO_BASELINE=y
+      - CONFIG_TEST_LEANCRYPTO_ML_DSA_44=y
+  crypto.leancrypto.ml_dsa_65:
+    testcases:
+      - leancrypto_mldsa.known_answer
+      - leancrypto_mldsa.random_sign_verify
+      - leancrypto_mldsa.random_failure
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    min_ram: 256
+    timeout: 180
+    extra_configs:
+      - CONFIG_LEANCRYPTO_ML_KEM_768=n
+      - CONFIG_LEANCRYPTO_ML_DSA_65=y
+      - CONFIG_TEST_LEANCRYPTO_ML_DSA_65=y
+  crypto.leancrypto.baseline_ml_dsa_65:
+    testcases:
+      - leancrypto_mldsa.known_answer
+      - leancrypto_mldsa.random_sign_verify
+      - leancrypto_mldsa.random_failure
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    min_ram: 256
+    timeout: 180
+    extra_configs:
+      - CONFIG_LEANCRYPTO=n
+      - CONFIG_TEST_LEANCRYPTO_BASELINE=y
+      - CONFIG_TEST_LEANCRYPTO_ML_DSA_65=y
+  crypto.leancrypto.ml_dsa_87:
+    testcases:
+      - leancrypto_mldsa.known_answer
+      - leancrypto_mldsa.random_sign_verify
+      - leancrypto_mldsa.random_failure
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    min_ram: 256
+    timeout: 180
+    extra_configs:
+      - CONFIG_LEANCRYPTO_ML_KEM_768=n
+      - CONFIG_LEANCRYPTO_ML_DSA_87=y
+      - CONFIG_TEST_LEANCRYPTO_ML_DSA_87=y
+  crypto.leancrypto.baseline_ml_dsa_87:
+    testcases:
+      - leancrypto_mldsa.known_answer
+      - leancrypto_mldsa.random_sign_verify
+      - leancrypto_mldsa.random_failure
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    min_ram: 256
+    timeout: 180
+    extra_configs:
+      - CONFIG_LEANCRYPTO=n
+      - CONFIG_TEST_LEANCRYPTO_BASELINE=y
+      - CONFIG_TEST_LEANCRYPTO_ML_DSA_87=y
+  crypto.leancrypto.ml_dsa_all_enabled:
+    testcases:
+      - leancrypto_mldsa.known_answer
+      - leancrypto_mldsa.random_sign_verify
+      - leancrypto_mldsa.random_failure
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    min_ram: 256
+    timeout: 180
+    extra_configs:
+      - CONFIG_LEANCRYPTO_ML_KEM_512=y
+      - CONFIG_LEANCRYPTO_ML_KEM_1024=y
+      - CONFIG_LEANCRYPTO_ML_DSA_44=y
+      - CONFIG_LEANCRYPTO_ML_DSA_65=y
+      - CONFIG_LEANCRYPTO_ML_DSA_87=y
+      - CONFIG_TEST_LEANCRYPTO_ML_DSA_87=y
+  crypto.leancrypto.combined:
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    min_ram: 256
+    timeout: 300
+    testcases:
+      - leancrypto_ml_kem_512.known_answer
+      - leancrypto_ml_kem_512.random_round_trip
+      - leancrypto_ml_kem_512.random_failure
+      - leancrypto_ml_kem_768.known_answer
+      - leancrypto_ml_kem_768.random_round_trip
+      - leancrypto_ml_kem_768.random_failure
+      - leancrypto_ml_kem_1024.known_answer
+      - leancrypto_ml_kem_1024.random_round_trip
+      - leancrypto_ml_kem_1024.random_failure
+      - leancrypto_ml_dsa_44.known_answer
+      - leancrypto_ml_dsa_44.random_sign_verify
+      - leancrypto_ml_dsa_44.random_failure
+      - leancrypto_ml_dsa_65.known_answer
+      - leancrypto_ml_dsa_65.random_sign_verify
+      - leancrypto_ml_dsa_65.random_failure
+      - leancrypto_ml_dsa_87.known_answer
+      - leancrypto_ml_dsa_87.random_sign_verify
+      - leancrypto_ml_dsa_87.random_failure
+    extra_args: EXTRA_CONF_FILE=combined.conf
+  crypto.leancrypto.combined_baseline:
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    min_ram: 256
+    timeout: 300
+    testcases:
+      - leancrypto_ml_kem_512.known_answer
+      - leancrypto_ml_kem_512.random_round_trip
+      - leancrypto_ml_kem_512.random_failure
+      - leancrypto_ml_kem_768.known_answer
+      - leancrypto_ml_kem_768.random_round_trip
+      - leancrypto_ml_kem_768.random_failure
+      - leancrypto_ml_kem_1024.known_answer
+      - leancrypto_ml_kem_1024.random_round_trip
+      - leancrypto_ml_kem_1024.random_failure
+      - leancrypto_ml_dsa_44.known_answer
+      - leancrypto_ml_dsa_44.random_sign_verify
+      - leancrypto_ml_dsa_44.random_failure
+      - leancrypto_ml_dsa_65.known_answer
+      - leancrypto_ml_dsa_65.random_sign_verify
+      - leancrypto_ml_dsa_65.random_failure
+      - leancrypto_ml_dsa_87.known_answer
+      - leancrypto_ml_dsa_87.random_sign_verify
+      - leancrypto_ml_dsa_87.random_failure
+    extra_configs:
+      - CONFIG_LEANCRYPTO=n
+      - CONFIG_TEST_LEANCRYPTO_BASELINE=y
+      - CONFIG_TEST_LEANCRYPTO_ALL=y

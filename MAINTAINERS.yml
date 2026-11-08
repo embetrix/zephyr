@@ -7574,8 +7574,11 @@ West:
     - embetrix
   files:
     - modules/leancrypto/
+    - tests/crypto/leancrypto/
   labels:
     - "area: Crypto / RNG"
+  tests:
+    - crypto.leancrypto
 
 "West project: liblc3":
   status: maintained

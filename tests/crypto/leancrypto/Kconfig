@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2026 Embetrix Embedded Systems Solutions <ayoub.zaki@embetrix.com>
+# SPDX-License-Identifier: Apache-2.0
+
+source "Kconfig.zephyr"
+
+config TEST_LEANCRYPTO_BASELINE
+	bool "Build the measurement harness without LeanCrypto"
+
+config TEST_LEANCRYPTO_ALL
+	bool "Test all six parameter sets in one image"
+	depends on (LEANCRYPTO_ML_KEM_512 && LEANCRYPTO_ML_KEM_768 && LEANCRYPTO_ML_KEM_1024 && \
+		LEANCRYPTO_ML_DSA_44 && LEANCRYPTO_ML_DSA_65 && LEANCRYPTO_ML_DSA_87) || \
+		TEST_LEANCRYPTO_BASELINE
+	help
+	  Run all ML-KEM and ML-DSA tests sequentially, reusing one worker
+	  stack. Each parameter set retains its own caller buffers.
+
+config TEST_LEANCRYPTO_STACK_SIZE
+	int "Cryptographic operation thread stack budget"
+	default 163840 if TEST_LEANCRYPTO_ML_DSA || TEST_LEANCRYPTO_ALL
+	default 24576
+	range 16384 262144
+
+choice TEST_LEANCRYPTO_PARAMETER_SET
+	prompt "Parameter set under test"
+	depends on !TEST_LEANCRYPTO_ALL
+	default TEST_LEANCRYPTO_ML_KEM_768
+
+config TEST_LEANCRYPTO_ML_KEM_512
+	bool "ML-KEM-512"
+	depends on LEANCRYPTO_ML_KEM_512 || TEST_LEANCRYPTO_BASELINE
+
+config TEST_LEANCRYPTO_ML_KEM_768
+	bool "ML-KEM-768"
+	depends on LEANCRYPTO_ML_KEM_768 || TEST_LEANCRYPTO_BASELINE
+
+config TEST_LEANCRYPTO_ML_KEM_1024
+	bool "ML-KEM-1024"
+	depends on LEANCRYPTO_ML_KEM_1024 || TEST_LEANCRYPTO_BASELINE
+
+config TEST_LEANCRYPTO_ML_DSA_44
+	bool "ML-DSA-44"
+	depends on LEANCRYPTO_ML_DSA_44 || TEST_LEANCRYPTO_BASELINE
+
+config TEST_LEANCRYPTO_ML_DSA_65
+	bool "ML-DSA-65"
+	depends on LEANCRYPTO_ML_DSA_65 || TEST_LEANCRYPTO_BASELINE
+
+config TEST_LEANCRYPTO_ML_DSA_87
+	bool "ML-DSA-87"
+	depends on LEANCRYPTO_ML_DSA_87 || TEST_LEANCRYPTO_BASELINE
+
+endchoice
+
+config TEST_LEANCRYPTO_ML_DSA
+	def_bool TEST_LEANCRYPTO_ML_DSA_44 || TEST_LEANCRYPTO_ML_DSA_65 || TEST_LEANCRYPTO_ML_DSA_87

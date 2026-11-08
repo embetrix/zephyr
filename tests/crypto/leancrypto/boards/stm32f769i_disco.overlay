@@ -1,0 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Embetrix Embedded Systems Solutions <ayoub.zaki@embetrix.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+&rng {
+	status = "okay";
+};
