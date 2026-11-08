@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2026 Embetrix Embedded Systems Solutions <ayoub.zaki@embetrix.com>
+# SPDX-License-Identifier: Apache-2.0
+
+tests:
+  crypto.leancrypto.acvp:
+    tags:
+      - crypto
+      - leancrypto
+    platform_allow:
+      - mps2/an385
+      - stm32f769i_disco
+    integration_platforms:
+      - mps2/an385
+      - stm32f769i_disco
+    harness: ztest
+    timeout: 300
+    min_ram: 256

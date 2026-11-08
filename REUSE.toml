@@ -403,3 +403,11 @@ SPDX-License-Identifier = "MIT"
 SPDX-FileComment = "Compiled into the firmware only when the Xtensa reset vector is enabled."
 Zephyr-Description = "Xtensa Startup Assembly Files"
 Zephyr-Kconfig-Condition = "CONFIG_XTENSA_RESET_VECTOR"
+
+[[annotations]]
+path = "tests/crypto/leancrypto/acvp/src/vectors.h"
+SPDX-License-Identifier = "NIST-Software"
+SPDX-FileCopyrightText = "National Institute of Standards and Technology"
+SPDX-FileComment = "Selected NIST ACVP vectors used only by the LeanCrypto regression tests."
+Zephyr-Description = "NIST ACVP ML-KEM and ML-DSA test vectors"
+Zephyr-Origin = "https://github.com/usnistgov/ACVP-Server/tree/975de31eb83d87039ec88934fdc47d8c312b892d"
